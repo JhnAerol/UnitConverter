@@ -15,6 +15,20 @@ namespace UnitConverter.ViewModels
 
         [ObservableProperty]
         private string convertionName;
-       
+
+        [ObservableProperty]
+        private string convertionType;
+
+        [ObservableProperty]
+        private string input;
+
+        [ObservableProperty]
+        private string result;
+
+        [ObservableProperty]
+        private string fromUnit;
+
+        [ObservableProperty]
+        private string toUnit;
     }
 }

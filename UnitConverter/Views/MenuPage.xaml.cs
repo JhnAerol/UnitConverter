@@ -4,7 +4,6 @@ namespace UnitConverter.Views;
 
 public partial class MenuPage : ContentPage
 {
-
     List<string> units { get; set; }
 
     public MenuPage()
@@ -20,6 +19,7 @@ public partial class MenuPage : ContentPage
 			string name = button.ClassId;
 
 			string CName = name.Split(' ')[0];
+            vm.ConvertionType = CName;
 
             switch (CName)
 			{

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnitConverter.Views.ConvertPage"
+             xmlns:vm="clr-namespace:UnitConverter.ViewModels"
              BackgroundColor="{StaticResource Primary}">
 
     <ContentPage.Resources>
@@ -77,6 +78,7 @@
                     <Label Text="From" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource MutedText}" />
                     <Entry Style="{StaticResource BigEntry}"
                            Placeholder="0"
+                           Text="{Binding Input}"
                            Keyboard="Numeric"
                            x:Name="InputEntry" />
                 </StackLayout>
@@ -86,6 +88,7 @@
                             Title="Unit"
                             ItemsSource="{Binding Units}"
                             HorizontalTextAlignment="Center"
+                            SelectedItem="{Binding FromUnit}"
                             FontAttributes="Bold"
                             FontSize="20"
                             Style="{StaticResource RoundedPicker}" />
@@ -102,7 +105,7 @@
                 <Label Text="Result" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource MutedText}" />
 
                 <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center" Padding="6">
-                    <Label Text="0.00"
+                    <Label Text="{Binding Result}"
                            FontSize="36"
                            FontAttributes="Bold"
                            VerticalOptions="Center"
@@ -115,6 +118,8 @@
                     <Picker Grid.Column="0"
                             Title="Unit"
                             ItemsSource="{Binding Units}"
+                            SelectedItem="{Binding ToUnit}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged"
                             HorizontalTextAlignment="Center"
                             FontAttributes="Bold"
                             FontSize="20"
