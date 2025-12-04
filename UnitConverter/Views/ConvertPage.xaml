@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnitConverter.Views.ConvertPage"
              xmlns:vm="clr-namespace:UnitConverter.ViewModels"
+             Shell.TabBarBackgroundColor="black"
              BackgroundColor="{StaticResource Primary}">
 
     <ContentPage.Resources>
@@ -53,7 +54,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto, Auto, Auto" Padding="18">
+    <Grid RowDefinitions="Auto, Auto, Auto" Padding="18, 0">
 
         <Frame Grid.Row="0"
                Background="{StaticResource Gradient1}"
@@ -105,7 +106,7 @@
                 <Label Text="Result" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource MutedText}" />
 
                 <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center" Padding="6">
-                    <Label Text="{Binding Result}"
+                    <Label Text="0.00"
                            FontSize="36"
                            FontAttributes="Bold"
                            VerticalOptions="Center"

@@ -41,18 +41,17 @@
             </Style>
 
             <Style x:Key="CategoryLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontSize" Value="12" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="Margin" Value="0,5" />
+                <Setter Property="Margin" Value="5,5" />
             </Style>
 
             <Style TargetType="ImageButton" x:Key="PlayfulImageButton">
                 <Setter Property="HeightRequest" Value="80" />
                 <Setter Property="WidthRequest" Value="80" />
                 <Setter Property="CornerRadius" Value="20" />
-                <Setter Property="BackgroundColor" Value="White" />
                 <Setter Property="Aspect" Value="AspectFit" />
                 <Setter Property="Padding" Value="10" />
             </Style>
