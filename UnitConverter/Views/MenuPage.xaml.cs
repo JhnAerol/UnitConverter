@@ -1,17 +1,39 @@
+using Microsoft.Maui.Controls.Platform;
 using UnitConverter.ViewModels;
+using UnitsNet;
+using UnitsNet.Units;
 
 namespace UnitConverter.Views;
 
 public partial class MenuPage : ContentPage
 {
-    List<string> units { get; set; }
 
+    bool isPointing = false;
+    CancellationTokenSource spinToken;
     public MenuPage()
 	{
 		InitializeComponent();
-	}
+        StartClockAnimation();
+    }
 
-    private void ImageButton_Clicked(object sender, EventArgs e)
+    public List<string> GetUnits(string quantityName)
+    {
+        return quantityName switch
+        {
+            "Length" => Enum.GetNames(typeof(LengthUnit)).ToList(),
+            "Mass" => Enum.GetNames(typeof(MassUnit)).ToList(),
+            "Volume" => Enum.GetNames(typeof(VolumeUnit)).ToList(),
+            "Temperature" => Enum.GetNames(typeof(TemperatureUnit)).ToList(),
+            "Speed" => Enum.GetNames(typeof(SpeedUnit)).ToList(),
+            "Area" => Enum.GetNames(typeof(AreaUnit)).ToList(),
+            "Information" => Enum.GetNames(typeof(InformationUnit)).ToList(),
+            "Duration" => Enum.GetNames(typeof(DurationUnit)).ToList(),
+            "Energy" => Enum.GetNames(typeof(EnergyUnit)).ToList(),
+            _ => new List<string>()
+        };
+    }
+
+    private async void ImageButton_Clicked(object sender, EventArgs e)
     {
 		if (sender is ImageButton button)
 		{
@@ -21,58 +43,101 @@ public partial class MenuPage : ContentPage
 			string CName = name.Split(' ')[0];
             vm.ConvertionType = CName;
 
-            switch (CName)
-			{
-				case "Area":
-                    units = new List<string> { "Square millimeter", "Square centimeter", "Square meter", "Hectare", "Square kilometer", "Square inch", "Square foot", "Square yard", "Acre", "Square mile" };
+            var units = GetUnits(CName);
 
-                    break;
-                case "Digital":
-                    units = new List<string> { "Bit", "Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte", "Zettabyte", "Yottabyte" };
-
-                    break;
-                case "Mass":
-                    units = new List<string> { "Milligram", "Gram", "Kilogram", "Metric ton", "Ounce", "Pound", "Stone", "US ton", "Imperial ton" };
-
-                    break;
-                case "Length":
-                    units = new List<string> { "Millimeter", "Centimeter", "Decimeter", "Meter", "Decameter", "Hectometer", "Kilometer", "Micrometer", "Nanometer", "Megameter", "Inch", "Foot", "Yard", "Mile", "Furlong", "Chain", "Nautical mile", "League", "Astronomical Unit", "Light-year", "Parsec", "Hand", "Rod", "Pole", "Perch", "Cubit", "Span" };
-
-                    break;
-                case "Volume":
-                    units = new List<string> { "Milliliter", "Centiliter", "Deciliter", "Liter", "Decaliter", "Hectoliter", "Cubic meter", "Cubic centimeter", "Cubic inch", "Cubic foot", "Gallon", "Quart", "Pint", "Cup", "Fluid ounce" };
-
-                    break;
-                case "Temperature":
-                    units = new List<string> { "Celsius", "Fahrenheit", "Kelvin", "Rankine" };
-
-                    break;
-                case "Time":
-                    units = new List<string> { "Second", "Minute", "Hour", "Day", "Week", "Month", "Year", "Decade", "Century", "Millennium" };
-
-                    break;
-                case "Energy":
-                    units = new List<string> { "Joule", "Kilojoule", "Calorie", "Kilocalorie", "Watt-hour", "Kilowatt-hour", "Electronvolt", "British thermal unit", "Foot-pound" };
-
-                    break;
-                case "Speed":
-                    units = new List<string> { "Meters per second", "Kilometers per hour", "Miles per hour", "Knot", "Foot per second" };
-
-                    break;
-                default:
-                    break;
-
+            foreach (var unit in units)
+            {
+                vm.Units.Add(unit);
             }
 
-			foreach (var unit in units)
-			{
-				vm.Units.Add(unit);
-			}
+            vm.ConvertionName = name;
 
-			vm.ConvertionName = name;
+            ImageButton IB = sender as ImageButton;
+
+            T(IB);
 
             var convertPage = new ConvertPage(vm);
-			Navigation.PushAsync(convertPage);
-		}
+            await Navigation.PushAsync(convertPage);
+        }
+    }
+
+    private async void T(ImageButton IB)
+    {
+        isPointing = true;
+        spinToken?.Cancel();
+        this.AbortAnimation("ArrowSpin");
+
+        double angle = CalculateAngleToButton(IB);
+
+        await Arrow.RotateTo(angle, 600, Easing.CubicOut);
+
+        await Task.Delay(2000);
+
+        isPointing = false;
+        StartClockAnimation();
+    }
+
+    private void StartClockAnimation()
+    {
+        if (isPointing) return;
+
+        spinToken = new CancellationTokenSource();
+        var token = spinToken.Token;
+
+        this.Animate("ArrowSpin", d =>
+        {
+            if (token.IsCancellationRequested)
+            {
+                this.AbortAnimation("ArrowSpin");
+                return;
+            }
+
+            Arrow.Rotation = (Arrow.Rotation + 3) % 360;
+
+        }, 16, 16, repeat: () => true);
+    }
+
+    private double CalculateAngleToButton(ImageButton button)
+    {
+        if (button.Parent is VerticalStackLayout stack &&
+            stack.Parent is Frame frame)
+        {
+            var hOptions = frame.HorizontalOptions;
+            var vOptions = frame.VerticalOptions;
+
+            if (hOptions.Alignment == LayoutAlignment.Center &&
+                vOptions.Alignment == LayoutAlignment.Start)
+                return 0;
+
+            if (hOptions.Alignment == LayoutAlignment.End &&
+                vOptions.Alignment == LayoutAlignment.Start)
+                return 45; 
+
+            if (hOptions.Alignment == LayoutAlignment.End &&
+                vOptions.Alignment == LayoutAlignment.Center)
+                return 90;
+
+            if (hOptions.Alignment == LayoutAlignment.End &&
+                vOptions.Alignment == LayoutAlignment.End)
+                return 135;
+
+            if (hOptions.Alignment == LayoutAlignment.Center &&
+                vOptions.Alignment == LayoutAlignment.End)
+                return 180;
+
+            if (hOptions.Alignment == LayoutAlignment.Start &&
+                vOptions.Alignment == LayoutAlignment.End)
+                return 225;
+
+            if (hOptions.Alignment == LayoutAlignment.Start &&
+                vOptions.Alignment == LayoutAlignment.Center)
+                return 270;
+
+            if (hOptions.Alignment == LayoutAlignment.Start &&
+                vOptions.Alignment == LayoutAlignment.Start)
+                return 315;
+        }
+
+        return 0;
     }
 }

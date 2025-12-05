@@ -4,7 +4,7 @@
              x:Class="UnitConverter.Views.MenuPage"
              Title="MenuPage"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{StaticResource Primary}">
+             BackgroundImageSource="bg1.jpeg">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -14,209 +14,284 @@
             <Color x:Key="Color4">#EF476F</Color>
             <Color x:Key="Color5">#06D6A0</Color>
             <Color x:Key="Color6">#118AB2</Color>
-            <Color x:Key="Color7">#073B4C</Color>
-            <Color x:Key="Color8">#7209B7</Color>
-            <Color x:Key="Color9">#3A86FF</Color>
+            <Color x:Key="Color7">#7209B7</Color>
+            <Color x:Key="Color8">#3A86FF</Color>
 
             <LinearGradientBrush x:Key="Gradient1" StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#FFD166" Offset="0.0" />
+                <GradientStop Color="#FF9A44" Offset="0.5" />
                 <GradientStop Color="#FFB347" Offset="1.0" />
             </LinearGradientBrush>
 
             <LinearGradientBrush x:Key="Gradient2" StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#4ECDC4" Offset="0.0" />
+                <GradientStop Color="#3DB8AF" Offset="0.5" />
                 <GradientStop Color="#44A08D" Offset="1.0" />
             </LinearGradientBrush>
 
             <LinearGradientBrush x:Key="Gradient3" StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#EF476F" Offset="0.0" />
+                <GradientStop Color="#FF6B9D" Offset="0.5" />
                 <GradientStop Color="#FF9A9E" Offset="1.0" />
             </LinearGradientBrush>
 
+            <LinearGradientBrush x:Key="Gradient4" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#7209B7" Offset="0.0" />
+                <GradientStop Color="#9D4EDD" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="Gradient5" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#06D6A0" Offset="0.0" />
+                <GradientStop Color="#1B9AAA" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <RadialGradientBrush x:Key="ClockBackground">
+                <GradientStop Color="#FFFFFF" Offset="0.0" />
+                <GradientStop Color="#F0F4F8" Offset="0.7" />
+                <GradientStop Color="#E2E8F0" Offset="1.0" />
+            </RadialGradientBrush>
+
             <Style x:Key="CategoryFrame" TargetType="Frame">
-                <Setter Property="CornerRadius" Value="25" />
+                <Setter Property="CornerRadius" Value="28" />
                 <Setter Property="HasShadow" Value="True" />
-                <Setter Property="Padding" Value="15" />
-                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="8" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="BorderColor" Value="White" />
             </Style>
 
             <Style x:Key="CategoryLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontSize" Value="11" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="Margin" Value="5,5" />
+                <Setter Property="Margin" Value="0,2,0,0" />
             </Style>
 
             <Style TargetType="ImageButton" x:Key="PlayfulImageButton">
-                <Setter Property="HeightRequest" Value="80" />
-                <Setter Property="WidthRequest" Value="80" />
-                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HeightRequest" Value="42" />
+                <Setter Property="WidthRequest" Value="42" />
+                <Setter Property="CornerRadius" Value="21" />
                 <Setter Property="Aspect" Value="AspectFit" />
-                <Setter Property="Padding" Value="10" />
+                <Setter Property="Padding" Value="8" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
             </Style>
 
             <Style TargetType="Label" x:Key="TitleLabel">
-                <Setter Property="FontSize" Value="32" />
+                <Setter Property="FontSize" Value="28" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="TextColor" Value="#FF6B35" />
-                <Setter Property="Margin" Value="0,20,0,30" />
+                <Setter Property="TextColor" Value="{StaticResource Color8}" />
+                <Setter Property="Margin" Value="0,10,0,15" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="SubtitleLabel">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource Color3}" />
+                <Setter Property="Margin" Value="0,0,0,20" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ScrollView>
-        <Grid RowDefinitions="Auto, *, *, *" 
-              ColumnDefinitions="*, *, *"
-              RowSpacing="10"
-              ColumnSpacing="10"
-              Padding="20">
 
-            <Frame Grid.Row="0" Grid.ColumnSpan="3"
-                   CornerRadius="30"
-                   Background="{StaticResource Gradient1}"
-                   Padding="20,15"
-                   HasShadow="True">
-                <Label Text="Unit Adventure" 
-                       Style="{StaticResource TitleLabel}" />
-            </Frame>
+        
+        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            
 
-            <Frame Grid.Row="1" Grid.Column="0"
-                   Style="{StaticResource CategoryFrame}"
-                   Background="{StaticResource Gradient1}">
-                <VerticalStackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
-                                     Spacing="8">
-                    <ImageButton Style="{StaticResource PlayfulImageButton}"
-                                 Source="bit.png"
-                                 ClassId="Digital Converter"
-                                 Clicked="ImageButton_Clicked"/>
-                    <Label Text=" Digital" 
-                           Style="{StaticResource CategoryLabel}" />
-                </VerticalStackLayout>
-            </Frame>
+            <Label Text="Unit Converter" Style="{StaticResource TitleLabel}"/>
+            <Label Text="Spin the wheel and choose!" Style="{StaticResource SubtitleLabel}"/>
 
-            <Frame Grid.Row="1" Grid.Column="1"
-                   Style="{StaticResource CategoryFrame}"
-                   Background="{StaticResource Gradient2}">
-                <VerticalStackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
-                                     Spacing="8">
-                    <ImageButton Style="{StaticResource PlayfulImageButton}"
-                                 Source="area_graph.png"
-                                 ClassId="Area Converter"
-                                 Clicked="ImageButton_Clicked"/>
-                    <Label Text="Area" 
-                           Style="{StaticResource CategoryLabel}" />
-                </VerticalStackLayout>
-            </Frame>
+            <Grid HorizontalOptions="Center" 
+                  VerticalOptions="Center" 
+                  HeightRequest="390" 
+                  WidthRequest="390"
+                  Margin="0,20">
 
-            <Frame Grid.Row="1" Grid.Column="2"
-                   Style="{StaticResource CategoryFrame}"
-                   Background="{StaticResource Gradient3}">
-                <VerticalStackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
-                                     Spacing="8">
-                    <ImageButton Style="{StaticResource PlayfulImageButton}"
-                                 Source="arrows.png"
-                                 ClassId="Speed Converter"
-                                 Clicked="ImageButton_Clicked"/>
-                    <Label Text="Speed" 
-                           Style="{StaticResource CategoryLabel}" />
-                </VerticalStackLayout>
-            </Frame>
+                <Frame HeightRequest="300"
+                       WidthRequest="300"
+                       CornerRadius="150"
+                       Background="{StaticResource ClockBackground}"
+                       HasShadow="True"
+                       BorderColor="#E2E8F0"
+                       Opacity="0.7"
+                       Padding="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center">
+                    <Frame.Shadow>
+                        <Shadow Brush="#CBD5E1" 
+                                Offset="0,8" 
+                                Radius="20" 
+                                Opacity="0.3"/>
+                    </Frame.Shadow>
+                </Frame>
 
-            <Frame Grid.Row="2" Grid.Column="0"
-                   Style="{StaticResource CategoryFrame}"
-                   Background="{StaticResource Gradient2}">
-                <VerticalStackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
-                                     Spacing="8">
-                    <ImageButton Style="{StaticResource PlayfulImageButton}"
-                                 Source="clock.png"
-                                 ClassId="Time Converter"
-                                 Clicked="ImageButton_Clicked"/>
-                    <Label Text="Time" 
-                           Style="{StaticResource CategoryLabel}" />
-                </VerticalStackLayout>
-            </Frame>
+                <Frame HeightRequest="260"
+                       WidthRequest="260"
+                       CornerRadius="130"
+                       BackgroundColor="White"
+                       Opacity="0.7"
+                       HasShadow="False"
+                       BorderColor="#F1F5F9"
+                       Padding="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
 
-            <Frame Grid.Row="2" Grid.Column="1"
-                   Style="{StaticResource CategoryFrame}"
-                   Background="{StaticResource Gradient3}">
-                <VerticalStackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
-                                     Spacing="8">
-                    <ImageButton Style="{StaticResource PlayfulImageButton}"
-                                 Source="multimeter.png"
-                                 ClassId="Energy Converter"
-                                 Clicked="ImageButton_Clicked"/>
-                    <Label Text="Energy" 
-                           Style="{StaticResource CategoryLabel}" />
-                </VerticalStackLayout>
-            </Frame>
+                <Frame Background="{StaticResource Gradient1}"
+                       Style="{StaticResource CategoryFrame}"
+                       HeightRequest="85" WidthRequest="85"
+                       HorizontalOptions="Center" VerticalOptions="Start" 
+                       Margin="0,20,0,0">
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                        <ImageButton Style="{StaticResource PlayfulImageButton}" 
+                                   Source="bit.png" 
+                                   Clicked="ImageButton_Clicked"
+                                   ClassId="Information Converter"/>
+                        <Label Text="Digital" Style="{StaticResource CategoryLabel}"/>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <Frame Grid.Row="2" Grid.Column="2"
-                   Style="{StaticResource CategoryFrame}"
-                   Background="{StaticResource Gradient1}">
-                <VerticalStackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
-                                     Spacing="8">
-                    <ImageButton Style="{StaticResource PlayfulImageButton}"
-                                 Source="scale.png"
-                                 ClassId="Length Converter"
-                                 Clicked="ImageButton_Clicked"/>
-                    <Label Text="Length" 
-                           Style="{StaticResource CategoryLabel}" />
-                </VerticalStackLayout>
-            </Frame>
+                <Frame Background="{StaticResource Gradient2}"
+                       Style="{StaticResource CategoryFrame}"
+                       HeightRequest="85" WidthRequest="85"
+                       HorizontalOptions="End" VerticalOptions="Start" 
+                       Margin="0,60,55,0">
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                        <ImageButton Style="{StaticResource PlayfulImageButton}" 
+                                   Source="weight.png"
+                                   Clicked="ImageButton_Clicked"
+                                   ClassId="Mass Converter"/>
+                        <Label Text="Mass" Style="{StaticResource CategoryLabel}"/>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <Frame Grid.Row="3" Grid.Column="0"
-                   Style="{StaticResource CategoryFrame}"
-                   Background="{StaticResource Gradient3}">
-                <VerticalStackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
-                                     Spacing="8">
-                    <ImageButton Style="{StaticResource PlayfulImageButton}"
-                                 Source="temperature.png"
-                                 ClassId="Temperature Converter"
-                                 Clicked="ImageButton_Clicked"/>
-                    <Label Text="Temp" 
-                           Style="{StaticResource CategoryLabel}" />
-                </VerticalStackLayout>
-            </Frame>
+                <Frame Background="{StaticResource Gradient3}"
+                       Style="{StaticResource CategoryFrame}"
+                       HeightRequest="85" WidthRequest="85"
+                       HorizontalOptions="End" VerticalOptions="Center" 
+                       Margin="0,0,20,0">
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                        <ImageButton Style="{StaticResource PlayfulImageButton}" 
+                                   Source="arrows.png"
+                                   Clicked="ImageButton_Clicked"
+                                   ClassId="Speed Converter"/>
+                        <Label Text="Speed" Style="{StaticResource CategoryLabel}"/>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <Frame Grid.Row="3" Grid.Column="1"
-                   Style="{StaticResource CategoryFrame}"
-                   Background="{StaticResource Gradient1}">
-                <VerticalStackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
-                                     Spacing="8">
-                    <ImageButton Style="{StaticResource PlayfulImageButton}"
-                                 Source="volume_measurement.png"
-                                 ClassId="Volume Converter"
-                                 Clicked="ImageButton_Clicked"/>
-                    <Label Text="Volume" 
-                           Style="{StaticResource CategoryLabel}" />
-                </VerticalStackLayout>
-            </Frame>
+                <Frame Background="{StaticResource Gradient1}"
+                       Style="{StaticResource CategoryFrame}"
+                       HeightRequest="85" WidthRequest="85"
+                       HorizontalOptions="End" VerticalOptions="End" 
+                       Margin="0,0,55,60">
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                        <ImageButton Style="{StaticResource PlayfulImageButton}" 
+                                   Source="clock.png" 
+                                   Clicked="ImageButton_Clicked"
+                                   ClassId="Duration Converter"/>
+                        <Label Text="Time" Style="{StaticResource CategoryLabel}"/>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <Frame Grid.Row="3" Grid.Column="2"
-                   Style="{StaticResource CategoryFrame}"
-                   Background="{StaticResource Gradient2}">
-                <VerticalStackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
-                                     Spacing="8">
-                    <ImageButton Style="{StaticResource PlayfulImageButton}"
-                                 Source="weight.png"
-                                 ClassId="Mass Converter"
-                                 Clicked="ImageButton_Clicked"/>
-                    <Label Text="Mass" 
-                           Style="{StaticResource CategoryLabel}" />
-                </VerticalStackLayout>
-            </Frame>
-        </Grid>
+                <Frame Background="{StaticResource Gradient5}"
+                       Style="{StaticResource CategoryFrame}"
+                       HeightRequest="85" WidthRequest="85"
+                       HorizontalOptions="Center" VerticalOptions="End" 
+                       Margin="0,0,0,20">
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                        <ImageButton Style="{StaticResource PlayfulImageButton}" 
+                                   Source="multimeter.png" 
+                                   Clicked="ImageButton_Clicked"
+                                   ClassId="Energy Converter"/>
+                        <Label Text="Energy" Style="{StaticResource CategoryLabel}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Background="{StaticResource Gradient1}"
+                       Style="{StaticResource CategoryFrame}"
+                       HeightRequest="85" WidthRequest="85"
+                       HorizontalOptions="Start" VerticalOptions="End" 
+                       Margin="55,0,0,60">
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                        <ImageButton Style="{StaticResource PlayfulImageButton}" 
+                                   Source="scale.png"
+                                   Clicked="ImageButton_Clicked"
+                                   ClassId="Length Converter"/>
+                        <Label Text="Length" Style="{StaticResource CategoryLabel}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Background="{StaticResource Gradient3}"
+                       Style="{StaticResource CategoryFrame}"
+                       HeightRequest="85" WidthRequest="85"
+                       HorizontalOptions="Start" VerticalOptions="Center" 
+                       Margin="20,0,0,0">
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                        <ImageButton Style="{StaticResource PlayfulImageButton}" 
+                                   Source="temperature.png" 
+                                   Clicked="ImageButton_Clicked"
+                                   ClassId="Temperature Converter"/>
+                        <Label Text="Temp" Style="{StaticResource CategoryLabel}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Background="{StaticResource Gradient2}"
+                       Style="{StaticResource CategoryFrame}"
+                       HeightRequest="85" WidthRequest="85"
+                       HorizontalOptions="Start" VerticalOptions="Start" 
+                       Margin="55,60,0,0">
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                        <ImageButton Style="{StaticResource PlayfulImageButton}" 
+                                   Source="area_graph.png" 
+                                   Clicked="ImageButton_Clicked"
+                                   ClassId="Area Converter"/>
+                        <Label Text="Area" Style="{StaticResource CategoryLabel}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame HeightRequest="140"
+                       WidthRequest="140"
+                       CornerRadius="70"
+                       BackgroundColor="White"
+                       HasShadow="True"
+                       Padding="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center">
+                    <Frame.Shadow>
+                        <Shadow Brush="#FF6B35" 
+                                Offset="0,0" 
+                                Radius="15" 
+                                Opacity="0.2"/>
+                    </Frame.Shadow>
+
+                    <Image x:Name="Arrow" 
+                           Source="arrow_right.png" 
+                           HeightRequest="100" 
+                           WidthRequest="100"
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           Rotation="0">
+                    </Image>
+                </Frame>
+
+                <BoxView HeightRequest="20"
+                         WidthRequest="20"
+                         CornerRadius="10"
+                         BackgroundColor="#FF6B35"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"/>
+
+            </Grid>
+
+            <Label Text="Tap any category to start converting!" 
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource Color3}"
+                   Margin="0,10,0,0"/>
+
+            
+        </VerticalStackLayout>
     </ScrollView>
 
 </ContentPage>
