@@ -77,25 +77,24 @@ public partial class MenuPage : ContentPage
         StartClockAnimation();
     }
 
-    private void StartClockAnimation()
-    {
-        if (isPointing) return;
-
-        spinToken = new CancellationTokenSource();
-        var token = spinToken.Token;
-
-        this.Animate("ArrowSpin", d =>
-        {
-            if (token.IsCancellationRequested)
-            {
-                this.AbortAnimation("ArrowSpin");
-                return;
-            }
-
-            Arrow.Rotation = (Arrow.Rotation + 3) % 360;
-
-        }, 16, 16, repeat: () => true);
-    }
+    [Obsolete]
+	private void StartClockAnimation()
+	{
+	    if (isPointing) return;
+	
+	    spinToken = new CancellationTokenSource();
+	    var token = spinToken.Token;
+	
+	    Device.StartTimer(TimeSpan.FromMilliseconds(16), () =>
+	    { 
+	        if (isPointing || spinToken.IsCancellationRequested) 
+	            return false; 
+	
+	        Arrow.Rotation = (Arrow.Rotation + 3) % 360; 
+	
+	        return true; 
+	    });
+	}
 
     private double CalculateAngleToButton(ImageButton button)
     {
