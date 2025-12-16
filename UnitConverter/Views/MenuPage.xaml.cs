@@ -52,9 +52,7 @@ public partial class MenuPage : ContentPage
 
             vm.ConvertionName = name;
 
-            ImageButton IB = sender as ImageButton;
-
-            T(IB);
+            T(button);
 
             var convertPage = new ConvertPage(vm);
             await Navigation.PushAsync(convertPage);
@@ -65,7 +63,6 @@ public partial class MenuPage : ContentPage
     {
         isPointing = true;
         spinToken?.Cancel();
-        this.AbortAnimation("ArrowSpin");
 
         double angle = CalculateAngleToButton(IB);
 

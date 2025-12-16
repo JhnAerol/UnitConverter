@@ -22,10 +22,10 @@ namespace UnitConverter.ViewModels
         private string convertionType;
 
         [ObservableProperty]
-        private double input = 0;
+        private decimal input;
 
         [ObservableProperty]
-        private double result;
+        private decimal result;
 
         [ObservableProperty]
         private string fromUnit;
@@ -33,7 +33,7 @@ namespace UnitConverter.ViewModels
         [ObservableProperty]
         private string toUnit;
 
-        public double ConvertValue(double value, string fromUnitName, string toUnitName)
+        public decimal ConvertValue(decimal value, string fromUnitName, string toUnitName)
         {
             IQuantity quantity = Quantity.From(value, ConvertionType, fromUnitName);
             IQuantity converted = quantity.ToUnit(Quantity
@@ -42,7 +42,7 @@ namespace UnitConverter.ViewModels
                                 .First(u => u.Name == toUnitName)
                                 .Value);
 
-            return (double)converted.Value;
+            return (decimal)converted.Value;
         }
     }
 }
